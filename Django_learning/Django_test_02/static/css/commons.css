@@ -1,0 +1,84 @@
+body{
+        margin: 0;  /* 消除边距 */
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.hide{
+    display: none;
+}
+.pg-header{
+    height: 52px;
+    min-width: 900px;  /* 这里设置的是最小宽度，如果小于这个宽度，就会出现左右的滚动条 */
+    background-color: #204d74;
+    line-height: 52px;
+}
+.pg-header .logo{
+    color: white;
+    font-size: 24px;
+    width: 199px;
+    text-align: center;
+    border-right: 1px solid darkslategray;
+}
+.pg-header .rmenus a{
+    display: inline-block;
+    padding: 0 15px;
+    color: white;
+    font-size: 16px;
+}
+.pg-header .rmenus a:hover{
+    background-color: #269abc;
+}
+.pg-header .avatar{
+    padding: 0 20px;
+}
+.pg-header .avatar img{
+    border-radius: 50%;
+}
+.pg-header .avatar .user-info{
+    display: none;
+    position: absolute;
+    width: 120px;
+    top: 52px;
+    right: 3px;
+    background-color: gray;
+    border: 1px solid #dddddd;
+    color: white;
+    z-index: 100;
+}
+.pg-header .avatar:hover .user-info{
+    display: block;
+}
+.pg-header .avatar:hover .user-info a{
+    color: white;
+    display: block;
+    padding: 2px;
+    text-align: center;
+
+}
+.menus{
+    width: 200px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 52px;
+    border-right: 1px solid #dddddd;
+}
+.content{
+    min-width: 800px;
+    position: absolute;
+    left: 200px;
+    right: 0;
+    top: 52px;
+    bottom: 0;
+    overflow: scroll;
+    z-index: 99;
+}
+.pg-body .menus a{
+    display: block;
+    padding: 10px 5px;
+    border-bottom: 1px solid #dddddd;
+}

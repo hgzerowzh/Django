@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>添加学生</h2>
+    <form action="/add_students.html" method="post">
+        姓名:<input type="text" name="stu_name">
+        年龄:<input type="text" name="stu_age">
+        <p>
+            男<input type="radio" name="stu_gender" value="1">&nbsp;
+            女<input type="radio" name="stu_gender" value="0">
+        </p>
+        所属班级:
+        <p>
+            <select name="stu_class_id" size="5">
+                {% for row in class_list %}
+                    <option value="{{ row.id }}">{{ row.title }}</option>
+                {% endfor %}
+            </select>
+        </p>
+
+        <input type="submit" value="提交">
+        {% csrf_token %}
+    </form>
+</body>
+</html>

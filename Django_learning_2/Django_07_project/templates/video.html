@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .condition a{
+            display: inline-block;
+            padding: 5px 8px;
+            border: 1px solid #dddddd;
+        }
+        .condition a.active{
+            background-color: coral;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="condition">
+        <h1>筛选</h1>
+        {# 方向的筛选 #}
+        <div>
+            {# 如果url传入的classification的值等于0，就让改方向类型被选中 #}
+            {% if kwargs.classification_id == 0 %}
+                <a href="/video-0-{{ kwargs.level_id }}-{{ kwargs.status }}.html" class="active">全部</a>
+            {% else %}
+                <a href="/video-0-{{ kwargs.level_id }}-{{ kwargs.status }}.html">全部</a>
+            {% endif %}
+
+            {# 对技术类型进行循环取值，若取出项的值和url中的classification_id的值相等，则让该项被选中 #}
+            {% for item in class_list %}
+                {% if item.id == kwargs.classification_id %}
+                    <a href="/video-{{ item.id }}-{{ kwargs.level_id }}-{{ kwargs.status }}.html" class="active">{{ item.name }}</a>
+                {% else %}
+                    <a href="/video-{{ item.id }}-{{ kwargs.level_id }}-{{ kwargs.status }}.html">{{ item.name }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        {# 技术类型的筛选 #}
+        <div>
+            {% if kwargs.level_id == 0 %}
+                <a href="/video-{{ kwargs.classification_id }}-0-{{ kwargs.status }}.html" class="active">全部</a>
+            {% else %}
+                <a href="/video-{{ kwargs.classification_id }}-0-{{ kwargs.status }}.html">全部</a>
+            {% endif %}
+            {% for item in level_list %}
+               {% if item.id == kwargs.level_id %}
+                    <a href="/video-{{ kwargs.classification_id }}-{{ item.id }}-{{ kwargs.status }}.html" class="active">{{ item.title }}</a>
+                {% else %}
+                    <a href="/video-{{ kwargs.classification_id }}-{{ item.id }}-{{ kwargs.status }}.html">{{ item.title }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        {# 上下线状态的筛选 #}
+        <div>
+            {% if kwargs.status == 0 %}
+                <a href="/video-{{ kwargs.classification_id }}-{{ kwargs.level_id }}-0.html" class="active">全部</a>
+            {% else %}
+                <a href="/video-{{ kwargs.classification_id }}-{{ kwargs.level_id }}-0.html">全部</a>
+            {% endif %}
+            {% for item in status_list %}
+                {% if item.id == kwargs.status %}
+                    <a class="active" href="/video-{{ kwargs.classification_id }}-{{ kwargs.level_id }}-{{ item.id }}.html">{{ item.name }}</a>
+                {% else %}
+                    <a href="/video-{{ kwargs.classification_id }}-{{ kwargs.level_id }}-{{ item.id }}.html">{{ item.name }}</a>
+                {% endif %} 
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <h1>结果</h1>
+        <div>
+            {% for row in video_list %}
+                <div>{{ row.title }}</div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

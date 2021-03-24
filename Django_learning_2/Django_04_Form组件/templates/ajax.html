@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/ajax/" method="post" id="fm">
+    {{ obj.as_p }}
+    <input type="button" value="提交" id="btn">
+</form>
+
+<script type="text/javascript" src="/static/js/jquery-3.1.1.js"></script>
+<script>
+    $(function () {
+        $('#btn').click(function () {
+            $.ajax({
+              url: '/ajax/',
+              type: 'POST',
+                data: $('#fm').serialize(),
+                dataType: 'JSON',
+                success: function (arg) {
+                  {#console.log(arg);#}
+                  if(arg.status=='艹'){
+                      window.location.href = 'http://cnblogs.com/hgzero';
+                  }else {
+                      console.log(arg)
+                  }
+                }
+            })
+        });
+
+    })
+
+
+
+</script>
+
+</body>
+</html>

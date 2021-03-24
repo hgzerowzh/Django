@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>1. 简单文件上传</h3>
+<form action="/upload.html" method="post" enctype="multipart/form-data">
+{#    {% csrf_token %}#}
+    <input type="text" name="user">
+    <div style="position: relative">
+        <a href="">上传</a>
+        <input type="file" name="img" style="opacity: 0;position: absolute;top: 0;left: 0;    ">
+    </div>
+    <input type="submit" value="提交">
+</form>
+
+<h3>2. 伪Ajax文件上传</h3>
+<div>
+    <iframe id="iframe1" name="ifra1" style="display: none"></iframe>
+    <form id="fm1" action="/upload_img.html" method="POST" target="ifra1" enctype="multipart/form-data">
+        <input type="file" name="k3" onchange="uploadFile();">
+    </form>
+</div>
+<h3>预览</h3>
+<div id="preview">
+</div>
+
+<script type="text/javascript" src="/static/jquery-3.1.1.js"></script>
+<script>
+    function uploadFile() {
+        document.getElementById('iframe1').onload = reloadIframe;
+        document.getElementById('fm1').submit();
+    }
+    function reloadIframe() {
+        var content = this.contentWindow.document.body.innerHTML;
+        var obj = JSON.parse(content);
+        // console.log(obj.data);
+        var tag = document.createElement('img');
+        tag.src = obj.data;
+        $('#preview').empty().append(tag);
+    }
+</script>
+
+</body>
+</html>

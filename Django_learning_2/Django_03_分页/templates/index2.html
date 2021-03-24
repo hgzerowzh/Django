@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
+</head>
+<body>
+{#        数据内容#}
+        <ul>
+            {% for row in data %}
+                <li>{{ row.username }} -- {{ row.age }}</li>
+            {% endfor %}
+        </ul>
+
+{#        分页的内容#}
+        <ul class="pagination">
+            {{ page_obj.page_str|safe }}
+        </ul>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/test/" method="post" novalidate enctype="multipart/form-data">
+    <p>{{ obj.user.label }}{{ obj.user }}{{ obj.errors.user.0 }}</p>
+    <p>{{ obj.age.label }}{{ obj.age }}{{ obj.errors.age.0 }}</p>
+    <p>{{ obj.email.label }}{{ obj.email }}{{ obj.errors.email.0 }}</p>
+    <p>{{ obj.img.label }}{{ obj.img }}{{ obj.errors.img.0 }}</p>
+    <p>{{ obj.city.label }}{{ obj.city }}{{ obj.errors.city.0 }}</p>
+    <p>{{ obj.hobby.label }}{{ obj.hobby }}{{ obj.errors.hobby.0 }}</p>
+
+    <p>{{ obj.xxoo.label }}{{ obj.xxoo }}{{ obj.errors.xxoo.0 }}</p>
+
+    <input type="submit" value="提交">
+</form>
+
+{#{{ obj.as_p }}#}
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+{% extends 'layout.html' %}
+
+{% block css %}
+    <style>
+        .hide{
+            display: none;
+        }
+        .shadow{
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: black;
+            opacity: 0.5;
+            z-index: 999;
+        }
+        .add-modal{
+            height: 300px;
+            width: 400px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-left: -200px;
+            margin-top: -150px;
+            background-color: white;
+            z-index: 1000;
+        }
+    </style>
+{% endblock %}
+
+{% block xxx %}
+    <h1>学生列表</h1>
+    <div>
+        <a href="/add_student/">添加</a>
+        <a id="addModal">对话框添加</a>
+    </div>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>学生姓名</th>
+                <th>所属班级</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+{#            {% for row in class_list %}#}
+{#                <tr>#}
+{#                    <td>{{ row.id }}</td>#}
+{#                    <td>{{ row.title }}</td>#}
+{#                    <td>#}
+{#                        <a href="/edit_class/?nid={{ row.id }}">编辑</a>#}
+{#                        |#}
+{#                        <a href="/del_class/?nid={{ row.id }}">删除</a>#}
+{#                    </td>#}
+{#                </tr>#}
+{#            {% endfor %}#}
+
+
+            {% for row in students_info %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.name }}</td>
+                    <td stu_class_id="{{ row.class_id }}">{{ row.title }}</td>
+                    <td>
+                        <a class="edit_modal">对话框编辑</a>
+                        |
+                        <a href="/edit_students/?stu_id={{ row.id }}">编辑</a>
+                        |
+                        <a href="/del_students/?stu_id={{ row.id }}">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div id="shadow" class="shadow hide"></div>
+    <div id="add-modal" class="add-modal hide">
+        <p>
+            姓名: <input type="text" id="stu_name" name="stu_name" placeholder="学生姓名">
+        </p>
+        <p>
+            班级:
+            <select name="class_id" id="class_id">
+                {% for row in class_list %}
+                    <option value="{{ row.id }}">{{ row.title }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>
+            <input type="button" id="stu_add" value="提交">
+            <input type="button" id="stu_cancel" value="取消">
+        </p>
+        <p><span id="message"></span></p>
+    </div>
+
+
+    <div id="edit_shadow" class="shadow hide"></div>
+    <div id="edit_modal" class="add-modal hide">
+        <h1>编辑学生</h1>
+        <p>
+            姓名: <input type="text" id="edit_stu_name" name="edit_stu_name">
+            <input type="text" id="edit_stu_id" name="edit_stu_id" style="display: none">
+        </p>
+        <p>
+            班级:
+            <select name="edit_class_id" id="edit_class_id">
+                {% for row in class_list %}
+                    <option value="{{ row.id }}">{{ row.title }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>
+            <input type="button" id="stu_edit_post" value="提交">
+            <input type="button" id="stu_edit_cancel" value="取消">
+        </p>
+        <p><span id="edit_message"></span></p>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+     <script src="/static/jquery-3.3.1.js"></script>
+     <script>
+        $(function () {
+            $('#addModal').click(function () {
+                document.getElementById('shadow').classList.remove('hide');
+                document.getElementById('add-modal').classList.remove('hide');
+            });
+
+           $('#stu_add').click(function () {
+            $.ajax({
+                    url: '/ajax_add_student/',
+                    type: 'POST',
+                    data: {
+                        'stu_name': $('#stu_name').val(),
+                        'stu_class': $('#class_id').val(),
+                    },
+                    success: function (data) {
+                        ret = JSON.parse(data);
+                        if(ret.status){
+                            location.reload()
+                        }
+                        else {
+                            $('#message').text(ret.mesg);
+                        }
+                    }
+                })
+            });
+
+            $('#stu_cancel').click(function () {
+                document.getElementById('shadow').classList.add('hide');
+                document.getElementById('add-modal').classList.add('hide');
+            });
+
+
+            $('.edit_modal').click(function () {
+                document.getElementById('edit_modal').classList.remove('hide');
+                document.getElementById('edit_shadow').classList.remove('hide');
+
+                var v = $(this).parent().prevAll();
+                var stu_name = $(v[1]).text();
+                var stu_id = $(v[2]).text();
+                var stu_class_id = $(v[0]).attr('stu_class_id');
+
+                $('#edit_stu_name').val(stu_name);
+                $('#edit_stu_id').val(stu_id);
+                $('#edit_class_id').val(stu_class_id);
+
+            });
+
+            $('#stu_edit_cancel').click(function () {
+                document.getElementById('edit_modal').classList.add('hide');
+                document.getElementById('edit_shadow').classList.add('hide');
+            });
+
+            $('#stu_edit_post').click(function () {
+                $.ajax({
+                    url: "/ajax_edit_student/",
+                    type: "POST",
+                    data: {
+                        'stu_id': $('#edit_stu_id').val(),
+                        'stu_name': $('#edit_stu_name').val(),
+                        'stu_class_id': $('#edit_class_id').val(),
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        {#ret = JSON.parse(data);#}
+                        if (data.status){
+                            location.reload();
+                        }else {
+                            $('#edit_message').text(data.message);
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}
+
+

@@ -1,0 +1,170 @@
+{% extends 'layout.html' %}
+
+{% block css %}
+    <style>
+        .hide{
+            display: none;
+        }
+        .shadow{
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: black;
+            opacity: 0.5;
+            z-index: 999;
+        }
+        .modalxx{
+            z-index: 1000;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            height: 300px;
+            width: 400px;
+            background-color: white;
+            margin-left: -200px;
+            margin-top: -150px;
+        }
+    </style>
+{% endblock %}
+
+{% block xxx %}
+    <div >
+    <h1>班级列表</h1>
+    <div style="margin-bottom: 10px">
+        <a href="/add_class" class="btn btn-primary">添加</a>
+        <a onclick="showModal();" class="btn btn-danger">对话框添加</a>
+    </div>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>班级名称</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in class_list %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.title }}</td>
+                    <td>
+                        <a href="/edit_class/?nid={{ row.id }}">编辑</a>
+                        |
+                        <a onclick="AjaxEdit(this);">Ajax编辑</a>
+{#                        <a href="hgzerowzh.com" onclick="return AjaxEdit();">Ajax编辑</a>#}
+{#                        取消默认的跳转效果，可以在onclick中加上return，然后函数结尾也要return一个false #}
+                        |
+                        <a href="/del_class/?nid={{ row.id }}">删除</a>
+                        |
+                        <a onclick="AjaxDel({{ row.id }});">Ajax删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{#    这里是对话框#}
+    <div id="shadow" class="shadow hide"></div>
+
+    <div id="modalxx" class="modalxx hide">
+        <p><input id="title" type="text" name="title"></p>
+        <input type="button" value="提交" onclick="AjaxSend();"><span id="errormsg"></span>
+        <input type="button" value="取消" onclick="AjaxCancelEdit();">
+    </div>
+
+
+    <div id="Editmodal" class="modalxx hide">
+        <p><input id="Edit_id" type="text" name="class_id" style="display: none;"></p>
+        <p><input id="Edit_title" type="text" name="title"></p>
+        <input type="button" value="提交" onclick="AjaxEditSend();">
+        <input type="button" value="取消" onclick="CancelEdit();">
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="/static/jquery-3.3.1.js"></script>
+    <script>
+        function showModal(){
+            document.getElementById('shadow').classList.remove('hide');
+            document.getElementById('modalxx').classList.remove('hide');
+        }
+
+        function AjaxSend() {
+            $.ajax({
+                url: '/modal_add_class/',
+                type: 'POST',
+                data: {'title': $('#title').val()},
+                success: function (data) {
+                    // 当服务端处理完成后，返回数据时，该函数自动调用
+                    // data就是服务端返回的值
+                    if (data == 'ok') {
+                        location.href = '/classes'
+                    }else {
+                        $('#errormsg').text(data);
+                    }
+                }
+            })
+        }
+
+        function AjaxDel(class_id) {
+            $.ajax({
+                url: '/ajax_del_class/',
+                type: 'POST',
+                data: {'nid': class_id},
+                success: function (data) {
+                    if (data == "ok") {
+                        location.href = '/classes/'
+                    }
+                }
+            })
+        }
+
+        function AjaxEdit(ths) {
+            document.getElementById('shadow').classList.remove('hide');
+            document.getElementById('Editmodal').classList.remove('hide');
+
+            // 取到当前编辑按钮父级标签的前面的所有值，保存为一个列表
+            var v = $(ths).parent().prevAll();
+
+            var class_id = $(v[1]).text();
+            $('#Edit_id').val(class_id);
+
+            var class_name = $(v[0]).text();
+            $('#Edit_title').val(class_name);
+        }
+
+        function AjaxEditSend() {
+            $.ajax({
+                url: '/ajax_edit_class/',
+                type: 'POST',
+                data: {
+                    'Edit_id': $('#Edit_id').val(),
+                    'Edit_title': $('#Edit_title').val(),
+                },
+                success: function (data) {
+                    ret = JSON.parse(data);
+                    if (ret.status){
+                        location.reload();
+                    }
+                    else {
+                        alert(ret.message)
+                    }
+                }
+            })
+        }
+
+        function CancelEdit() {
+            document.getElementById('shadow').classList.add('hide');
+            document.getElementById('Editmodal').classList.add('hide');
+        }
+
+        function AjaxCancelEdit() {
+            document.getElementById('shadow').classList.add('hide');
+            document.getElementById('modalxx').classList.add('hide');
+        }
+
+    </script>
+{% endblock %}

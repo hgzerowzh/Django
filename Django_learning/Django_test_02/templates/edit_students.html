@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>编辑学生</h1>
+    <form method="POST" action="/edit_students/?stu_id={{ stu_info.id }}">
+        学生姓名：<input type="text" name="stu_name" value="{{ stu_info.name }}">
+        所属班级：
+        <select name="class_id">
+            {% for row in class_list %}
+                {% if row.id == stu_info.class %}
+                    <option value="{{ row.id }}" selected="selected">{{ row.title }}</option>
+                {% else %}
+                    <option value="{{ row.id }}">{{ row.title }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <input type="submit" value="提交">
+    </form>
+
+</body>
+</html>

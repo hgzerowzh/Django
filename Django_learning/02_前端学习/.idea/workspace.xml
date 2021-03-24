@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="79e31347-8712-4682-ba5e-0aacc7edd378" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1c4N86Ez9WmaGzAGOWFHx4eU31g" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="K:\PyCharm_room\Django_learning\02_前端学习\HTML_CSS" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="K:\PyCharm_room\Django_learning\02_前端学习\HTML_CSS\image" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="79e31347-8712-4682-ba5e-0aacc7edd378" name="Default Changelist" comment="" />
+      <created>1589783743494</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589783743494</updated>
+      <workItem from="1589783749352" duration="14981000" />
+      <workItem from="1589863873216" duration="4397000" />
+      <workItem from="1589894550257" duration="478000" />
+      <workItem from="1589962150703" duration="6306000" />
+      <workItem from="1590816778258" duration="6489000" />
+      <workItem from="1590830974342" duration="2302000" />
+      <workItem from="1591078050514" duration="1234000" />
+      <workItem from="1591159402195" duration="648000" />
+      <workItem from="1591196781466" duration="3136000" />
+      <workItem from="1591510519899" duration="4596000" />
+      <workItem from="1591604295523" duration="6130000" />
+      <workItem from="1591704587335" duration="1497000" />
+      <workItem from="1591951612580" duration="102000" />
+      <workItem from="1592049201339" duration="1018000" />
+      <workItem from="1592059336706" duration="2378000" />
+      <workItem from="1594110831752" duration="17000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1592061378856">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592061378856" />
+    <state x="270" y="54" key="SettingsEditor" timestamp="1592059382195">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="270" y="54" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592059382195" />
+    <state x="449" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1591951612508">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="449" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1591951612508" />
+    <state x="838" y="146" width="672" height="678" key="search.everywhere.popup" timestamp="1591608400757">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="838" y="146" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1591608400757" />
+  </component>
+</project>

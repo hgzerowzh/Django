@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        {% for i in user_list %}
+            <li>{{ i }} | <a href="/edit/{{ i }}">编辑</a></li>
+{#            <li>{{ i }} | <a href="{% url "n2" i %}">编辑</a></li>#}
+{#           如果是多个值，继续加参数就可以了，用空格隔开 #}
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            height: 292px;
+            width: 502px;
+            border: solid 1px dimgray;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+        .box .header{
+            height: 50px;
+            width: 460px;
+            border-bottom: solid #000 1px;
+            margin: 0 auto;
+            line-height: 50px;
+        }
+        .box .header span{
+            float: left;
+            font: bold 18px/50px "Microsoft YaHei UI";
+            width: 100px;
+            text-indent: 12px;
+            border-bottom: solid 2px red;
+        }
+        .box .header a{
+            float: right;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        .box .header a:hover{
+            color: orange;
+        }
+        .box .body{
+            margin: 0 auto;
+            width: 460px;
+        }
+        .box .body div{
+            display: inline-block;
+            width: 460px;
+            height: 38px;
+            border-bottom: solid 1px lightgray;
+            margin: 0 auto;
+            line-height: 38px;
+        }
+        .box .body a{
+            text-decoration: none;
+            color: #000;
+            font: 14px "Microsoft YaHei UI";
+        }
+        .box .body a:before{
+            content: "· ";
+        }
+         .box .body a:hover{
+             color: red;
+         }
+        .box .body span{
+            color: #000;
+            font: 14px "Microsoft YaHei UI";
+            float: right;
+            line-height: 38px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="header">
+            <span>新闻列表</span>
+            <a href="">更多>></a>
+        </div>
+        <div class="body">
+            <div><a href="">Python开发工程师</a><span>2020-06-08</span></div>
+            <div><a href="">Linux运维工程师</a><span>2020-06-08</span></div>
+            <div><a href="">Java开发工程师</a><span>2020-06-08</span></div>
+            <div><a href="">运维开发工程师</a><span>2020-06-08</span></div>
+            <div><a href="">网络工程师</a><span>2020-06-08</span></div>
+            <div><a href="">大数据开发工程师</a><span>2020-06-08</span></div>
+        </div>
+    </div>
+</body>
+</html>

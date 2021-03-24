@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .w{
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .item{
+            width: 25%;
+            float: left;
+        }
+        .item img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div>瀑布流</div>
+    <div class="w" id="container">
+       <div class="item"></div>
+       <div class="item"></div>
+       <div class="item"></div>
+       <div class="item"></div>
+    </div>
+<script src="/static/jquery-3.1.1.js"></script>
+<script>
+    $(function () {
+        var obj = new ScrollImg();    // 实例化一个ScrollImg对象, 专门负责瀑布流的执行
+        obj.initImg();       // 进行图片的获取和在页面的插入
+        obj.scrollEvent();   // 探测滑轮是否滑到底部(当前最后一张图片)
+    });
+    function ScrollImg() {
+        // nid和lastPosition这两个变量被模拟成了类似py类中的静态变量
+        this.nid = 0;            // 保存最后一张图片的id号
+        this.lastPosition = 3;   // 保存最后一张图片在div中的位置编号(0到3，一共四个div)
+        this.initImg = function () {
+            var that = this;    // 这里的this指的就是这个实例化的对象(本身) ，// this = obj
+                console.log(that.nid);
+                $.ajax({
+                    url: '/imgs.html',
+                    type: 'POST',
+                    data: {nid: that.nid, },
+                    dataType: 'JSON',
+                    success:function (arg) {
+                        var img_list = arg.data;
+                        $.each(img_list, function (index, v) {
+                            var eqv = (index+that.lastPosition+1) % 4;
+                            var tag = document.createElement('img');
+                            tag.src = v.src;
+                            $('#container').children().eq(eqv).append(tag);
+                            // 当循环到最后一个图片时，将图片的ID赋值给NID
+                            if(index+1==img_list.length){
+                                //that.nid = v.id;
+                                that.nid = 0;
+                                that.lastPosition = eqv;
+                            }
+                    })
+                }
+            })
+        };
+        this.scrollEvent = function () {
+            var that = this;
+            $(window).scroll(function () {
+                // 什么时候到达最底部
+                // 文档高度
+                var docHeight = $(document).height();
+                // 窗口高度
+                var winHeight = $(window).height();
+                // 滚动条滑动高度
+                var scrollTop = $(window).scrollTop();
+                //if(winHeight+scrollTop == docHeight){
+                if(winHeight+scrollTop+5 > docHeight){
+                    // 一旦窗口的高度加上滑轮滑动的距离等于整个图片文档的高度，就再执行一次initImg
+                    that.initImg();
+                }
+            })
+        }
+    }
+</script>
+</body>
+</html>

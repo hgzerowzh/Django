@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>精美壁纸</div>
+    <div id="container">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+
+    <script src="/static/"></script>
+    <script>
+        $(function () {
+            var obj = new ScrollImg();
+        });
+
+        function ScrollImg() {
+            this.nid = 0;
+            this.lastPosition = -1;
+            this.initImg = function () {
+                var that = this;
+                $.ajax({
+                    url: '/imgs',
+                    type: 'POST',
+                    data: {nid: that.nid },
+                    dataType: 'JSON',
+                    success: function (arg) {
+                        var url_list = arg.data;
+                        $.each(url_list, function (index, v) {
+                            var tag = document.createElement('img');
+                            var eqv = (index+that.lastPosition+1)%4;
+                            tag.src = v.src;
+                            $('#container').children().eq(eqv).append(tag);
+                            if(index == url_list.length){
+                                that.nid = v.id;
+                                that.lastPosition = eqv;
+                            }
+                        })
+                    }
+
+                })
+            }
+        }
+
+    </script>
+
+
+
+</body>
+</html>

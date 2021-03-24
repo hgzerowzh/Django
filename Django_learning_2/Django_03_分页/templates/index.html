@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <ul>
+            {% for user in user_list %}
+                <li>{{ user.username }} -- {{ user.age }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/index.html?p={{ prev_page }}">上一页</a>
+        <a href="/index.html?p={{ next_page }}">下一页</a>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>编辑学生</h2>
+    <form action="/edit_students.html?nid={{ stu_obj.id }}" method="POST">
+        姓名:<input type="text" name="stu_name" value="{{ stu_obj.username }}">
+        年龄:<input type="text" name="stu_age" value="{{ stu_obj.age }}">
+        {% if stu_obj.gender == 1 %}
+            <p>
+                男<input type="radio" name="stu_gender" value="1" checked>&nbsp;
+                女<input type="radio" name="stu_gender" value="0">
+            </p>
+        {% elif stu_obj.gender == 0 %}
+            <p>
+                男<input type="radio" name="stu_gender" value="1">&nbsp;
+                女<input type="radio" name="stu_gender" value="0" checked>
+            </p>
+        {% endif %}
+        所属班级:
+        <p>
+            <select name="stu_class_id" size="5">
+                {% for row in class_obj %}
+                    {% if row.id == stu_obj.cs_id %}
+                        <option value="{{ row.id }}" selected="selected">{{ row.title }}</option>
+                    {% else %}
+                        <option value="{{ row.id }}">{{ row.title }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </p>
+        <input type="submit" value="提交">
+        {% csrf_token %}
+    </form>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--链式式引入css文件-->
+    <link rel="stylesheet" href="02_css_test.css">
+
+    <!--导入式引入css文件-->
+<!--    <style>-->
+<!--        /*这样会出现短暂的无渲染的html框架，然后再出现css渲染*/-->
+<!--        @import "02_css_test.css";-->
+<!--    </style>-->
+
+    <!--通过头文件的方式来引入css代码-->
+    <style>
+        /*以 # 号开头的是id选择器*/
+        #first{
+            background-color: red;
+            height: 50px;
+        }
+        #second{
+            background-color: yellow;
+            height: 50px;
+        }
+
+        /*以 . 号开头的是class选择器*/
+        .one{
+           background-color: green;
+            height: 30px;
+        }
+        .two{
+            background-color: blue;
+            height: 30px;
+        }
+
+        /*直接写标签名的是标签选择器*/
+        a{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>1. 这里演示选择器</h1>
+        <!--通过直接在标签中写style属性来引入css代码-->
+        <div style="color: red;background-color: green;">shit_01</div>
+
+
+        <!--id选择器中的id号不能相同-->
+        <div id="first">first，这里演示id选择器</div>
+        <div id="second">second，这里演示id选择器</div>
+
+        <!--class选择器中的值可以相同-->
+        <div class="one">one，这里演示类选择器</div>
+        <div class="two">two，这里演示类选择器</div>
+
+
+        <a>01-这里演示标签选择器</a>
+        <a>02-这里演示标签选择器</a>
+
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    <h1>模板标记学习</h1>
+
+    <h2>取值</h2>
+
+    <h3>引用单个值</h3>
+    <p>{{ name }}</p>
+    <h3>引用列表中的值</h3>
+    <p>{{ name.0 }}</p>
+    <p>{{ name.1 }}</p>
+    <h3>引用字典中的值</h3>
+    <p>{{ users_dict.first }}</p>
+    <p>{{ users_dict.second }}</p>
+    <p>{{ users_dict.third }}</p>
+
+    <h2>循环</h2>
+    <h2>简单循环</h2>
+    <ul>
+    {% for item in users %}
+        <li>{{ item }}</li>
+    {% endfor %}
+    </ul>
+    <h2>循环取列表中的字典的值</h2>
+    <ul>
+        {% for row in users_list_dict %}
+            <li>{{ row.id }} ** {{ row.name }} ** {{ row.age }}</li>
+        {% endfor %}
+    </ul>
+
+
+</body>
+</html>

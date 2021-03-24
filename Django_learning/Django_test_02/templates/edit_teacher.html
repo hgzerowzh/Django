@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>编辑老师</h1>
+    <form method="POST" action="/edit_teacher/?t_id={{ t_name.id }}">
+        <p>
+            老师姓名：<input type="text" name="teacher_name" value="{{ t_name.name }}">
+        </p>
+        任教班级：
+        <select name="teacher_class" multiple>
+            {% for row in class_list %}
+                {% if row.id in t_class %}
+                    <option value="{{ row.id }}" selected>{{ row.title }}</option>
+                {% else %}
+                    <option value="{{ row.id }}">{{ row.title }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <input type="submit" value="提交">
+    </form>
+
+</body>
+</html>
